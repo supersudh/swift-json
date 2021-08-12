@@ -11,9 +11,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        travelToMars(shouldTravel: false)
         return true
     }
 
@@ -29,6 +31,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func travelToMars(shouldTravel: Bool) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        if shouldTravel {
+            let marsRootPage = mainStoryboard.instantiateViewController(identifier: "marsRootPage")
+            let nav = UINavigationController(rootViewController: marsRootPage)
+            self.window?.rootViewController = nav
+            self.window?.makeKeyAndVisible()
+            print("done")
+        } else {
+            let logInScreen = mainStoryboard.instantiateViewController(identifier: "ViewController")
+            let nav = UINavigationController(rootViewController: logInScreen)
+            self.window?.rootViewController = logInScreen
+            self.window?.makeKeyAndVisible()
+        }
+        
     }
 
 
